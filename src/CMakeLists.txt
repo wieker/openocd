@@ -10,6 +10,8 @@ set(CMAKE_C_FLAGS "\
         -DRELSTR=\\\"aa\\\" \
         -DGITVERSION=\\\"bb\\\" \
         -DF_CPU=48000000  \
+        -L.libs  \
+        -lopenocd  \
 ")
 
 include_directories(..)
@@ -19,4 +21,12 @@ include_directories(../jimtcl)
 
 add_executable(customocd
         main.c
-        openocd.c)
+        openocd.c
+        jtag/adapter.c
+        jtag/commands.c
+        jtag/core.c
+        jtag/interface.c
+        helper/log.c
+        helper/time_support_common.c
+        helper/binarybuffer.c
+        )

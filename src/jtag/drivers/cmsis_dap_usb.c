@@ -1007,6 +1007,7 @@ static int cmsis_dap_init(void)
 		LOG_INFO("CMSIS-DAP: Interface Initialised (JTAG)");
 	}
 
+  LOG_INFO("CMSIS-DAP: Prepare (SWD)");
 	/* Be conservative and supress submiting multiple HID requests
 	 * until we get packet count info from the adaptor */
 	cmsis_dap_handle->packet_count = 1;
@@ -1655,6 +1656,7 @@ static int cmsis_dap_khz(int khz, int *jtag_speed)
 
 COMMAND_HANDLER(cmsis_dap_handle_info_command)
 {
+  LOG_INFO("here\n");
 	if (cmsis_dap_get_version_info() == ERROR_OK)
 		cmsis_dap_get_status();
 
