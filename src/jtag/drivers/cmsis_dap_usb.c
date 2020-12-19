@@ -376,6 +376,8 @@ static int cmsis_dap_usb_write(struct cmsis_dap *dap, int txlen)
 	/* Pad the rest of the TX buffer with 0's */
 	memset(dap->packet_buffer + txlen, 0, dap->packet_size - txlen);
 
+	LOG_INFO("xferd\n");
+
 	/* write data to device */
 	int retval = hid_write(dap->dev_handle, dap->packet_buffer, dap->packet_size);
 	if (retval == -1) {
