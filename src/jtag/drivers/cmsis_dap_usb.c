@@ -32,6 +32,10 @@
 #include "config.h"
 #endif
 
+#undef LOG_DEBUG
+#define CMSIS_DAP_JTAG_DEBUG
+#define LOG_DEBUG LOG_INFO
+
 #include <transport/transport.h>
 #include <jtag/swd.h>
 #include <jtag/interface.h>
@@ -376,7 +380,7 @@ static int cmsis_dap_usb_write(struct cmsis_dap *dap, int txlen)
 	/* Pad the rest of the TX buffer with 0's */
 	memset(dap->packet_buffer + txlen, 0, dap->packet_size - txlen);
 
-	LOG_INFO("xferd\n");
+	LOG_INFO("xferd %d cmd=%02X", txlen, dap->packet_buffer[1]);
 
 	/* write data to device */
 	int retval = hid_write(dap->dev_handle, dap->packet_buffer, dap->packet_size);
@@ -690,6 +694,7 @@ static void cmsis_dap_swd_write_from_queue(struct cmsis_dap *dap)
 		}
 	}
 
+	LOG_INFO("from queue");
 	queued_retval = cmsis_dap_usb_write(dap, idx);
 	if (queued_retval != ERROR_OK)
 		goto skip;

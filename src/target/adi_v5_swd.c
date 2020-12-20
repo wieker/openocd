@@ -132,7 +132,8 @@ static int swd_connect(struct adiv5_dap *dap)
 
 	status = swd_run_inner(dap);
 
-	if (status == ERROR_OK) {
+  LOG_INFO("where fail");
+  if (status == ERROR_OK) {
 		LOG_INFO("SWD DPIDR %#8.8" PRIx32, dpidr);
 		dap->do_reconnect = false;
 		status = dap_dp_init(dap);

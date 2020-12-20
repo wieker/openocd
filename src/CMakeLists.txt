@@ -26,6 +26,8 @@ add_executable(customocd
         jtag/commands.c
         jtag/core.c
         jtag/interface.c
+        jtag/drivers/cmsis_dap_usb.c
+        target/adi_v5_swd.c
         helper/log.c
         helper/time_support_common.c
         helper/binarybuffer.c
